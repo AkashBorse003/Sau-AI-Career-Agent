@@ -1,0 +1,51 @@
+{
+  "full_name": "Your Full Name",
+  "email": "",
+  "phone": "",
+  "location": "Pune, Maharashtra, India",
+  "education": [
+    {
+      "degree": "MCA",
+      "institution": "Savitribai Phule Pune University",
+      "details": "Verify dates and percentage."
+    },
+    {
+      "degree": "B.Sc. Computer Science",
+      "institution": "",
+      "details": "Add verified details."
+    }
+  ],
+  "experience": [
+    {
+      "title": "Intern",
+      "company": "Xform Technologies",
+      "period": "2022\u20132023",
+      "duration": "12 months",
+      "description": "Website/application development using Flutter, React, Angular and Java backend; some user support. Verify exact duties."
+    }
+  ],
+  "skills": [
+    "Python",
+    "Java",
+    "Flutter",
+    "React",
+    "Angular",
+    "SQL"
+  ],
+  "projects": [],
+  "certifications": [],
+  "preferences": {
+    "roles": [
+      "Application Support",
+      "Technical Support",
+      "Junior Software Engineer",
+      "AI/Data Science Intern"
+    ],
+    "locations": [
+      "Pune",
+      "Hyderabad",
+      "Bengaluru",
+      "Remote"
+    ]
+  }
+}
