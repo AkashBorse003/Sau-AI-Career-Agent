@@ -1,14 +1,1 @@
-{
-  "greenhouse": [
-    {
-      "company": "Replace with company",
-      "board_token": "REPLACE_WITH_BOARD_TOKEN"
-    }
-  ],
-  "lever": [
-    {
-      "company": "Replace with company",
-      "site": "REPLACE_WITH_LEVER_SITE"
-    }
-  ]
-}
+{"greenhouse":[],"lever":[]}

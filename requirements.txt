@@ -4,3 +4,7 @@ openai>=1.40
 python-dotenv>=1.0
 requests>=2.32
 python-docx>=1.1
+playwright>=1.50
+google-api-python-client>=2.160
+google-auth-httplib2>=0.2
+google-auth-oauthlib>=1.2

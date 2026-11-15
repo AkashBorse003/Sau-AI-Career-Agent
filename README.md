@@ -1,46 +1,59 @@
-# Sau AI Career Agent — MVP
+# Sau AI Career Agent
 
-## Included
-- Public Greenhouse and Lever company career-board search.
-- Basic job matching against your editable profile.
-- OpenAI-powered tailored resume drafts (DOCX), interview prep, study plan and HR email drafts.
-- Local SQLite application tracker and FastAPI API dashboard.
+Local-first career assistant using FastAPI, SQLite, React + Vite, Playwright and optional Gmail OAuth.
 
-## Safe automation
-This MVP does not scrape LinkedIn/Naukri/Indeed, bypass logins/CAPTCHAs, submit applications, or send emails/messages. It prepares materials and official links for your review. Use official APIs, saved job alerts and platform-authorized integrations. AI-generated content must be checked before use.
+## Features
+- Greenhouse and Lever public job-board discovery.
+- SQLite job and application tracker.
+- Profile-based job matching.
+- AI resume tailoring to DOCX and interview preparation.
+- Visible Playwright assisted form filling. It never clicks submit.
+- AI recruiter email reply drafting.
+- Optional Gmail integration to read unread mail and save replies as Gmail drafts; it never auto-sends.
+- React dashboard.
 
-## Install on Windows
-Open PowerShell inside the extracted folder:
+## Requirements
+Python 3.10+, Node.js 18+, OpenAI API key for AI features. Gmail requires Google OAuth Desktop credentials.
+
+## Backend (Windows PowerShell)
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
 pip install -r requirements.txt
+playwright install chromium
 Copy-Item .env.example .env
-notepad .env
-```
-Add your API key: `OPENAI_API_KEY=your_key_here`. Keep `.env` private.
-Run:
-```powershell
+# Edit .env and add OPENAI_API_KEY
 uvicorn app.main:app --reload
 ```
-Open http://127.0.0.1:8000/docs
+API docs: http://127.0.0.1:8000/docs
 
-If activation is blocked, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` and activate again.
+## Frontend
+Open a second terminal:
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+Open http://localhost:5173
 
-## Configure
-1. Edit `data/profile.json`; verify all education dates, experience, skills, projects and certificates.
-2. Edit `data/company_boards.json`. Replace placeholder Greenhouse board tokens and Lever site names with real identifiers for companies you want to monitor.
-3. The `gpt-6` model name in `.env` must be available to your API account. If not, set an API-supported model ID. ChatGPT subscriptions and API billing are separate.
+## Configure job boards
+Edit data/company_boards.json with public Greenhouse board tokens or Lever site identifiers. Example:
+```json
+{"greenhouse":[{"company":"Example Co","board_token":"example"}],"lever":[{"company":"Example Co","site":"example"}]}
+```
+Portal support depends on official APIs and each website's terms. This starter does not scrape LinkedIn/Naukri or bypass login, CAPTCHA, bot protection or access controls. Add integrations only where permitted.
 
-## Test
-- GET `/api/health` should return `{"status":"ok"}`.
-- GET `/api/profile` should show your profile.
-- Add at least one valid Greenhouse or Lever board identifier.
-- POST `/api/jobs/refresh` with `{"query":"application support","location":"India"}`.
-- GET `/api/jobs` to view stored jobs.
-- For a returned job ID, POST to `/api/jobs/{id}/tailor`, `/prep`, and `/application-pack  with {"job_id":"same-id"}`.
-- Generated files are saved under `generated/`.
-- Track reviewed applications with POST `/api/applications`.
+## Profile
+Edit data/profile.json with accurate verified information before using resume or autofill features.
 
-LinkedIn and Naukri can be integrated later through permitted APIs, job alert email ingestion, or user-provided job links/descriptions—not unauthorized scraping or bot activity.
+## Gmail (optional)
+1. Enable Gmail API in Google Cloud Console.
+2. Create OAuth Client ID of type Desktop app.
+3. Save downloaded JSON in project root as credentials.json.
+4. Call POST /api/email/unread to authorize. The local OAuth browser will open.
+5. Use POST /api/email/draft with a message_id to save an AI reply as a Gmail draft. It is never sent automatically.
+
+## Form autofill
+Use the Auto Apply tab with an official application URL. The visible browser fills common fields from your profile. Review every answer and submit manually. No login or CAPTCHA bypass. Resume upload requires a local file path and a normal file input.
+
+Keep .env, credentials.json, Gmail tokens, local database and generated files private. Test each employer form before relying on it.
